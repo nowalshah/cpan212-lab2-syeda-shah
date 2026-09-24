@@ -1,0 +1,19 @@
+meta {
+  name: Update a tool that does not exist
+  type: http
+  seq: 10
+}
+
+put {
+  url: {{baseUrl}}/api/tools/nope
+  body: json
+  auth: none
+}
+
+body:json {
+  {"name":"Wheelbarrow","category":"garden","condition":"worn","available":false,"maxLoanDays":7}
+}
+
+assert {
+  res.status: eq 404
+}

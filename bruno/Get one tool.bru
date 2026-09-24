@@ -1,0 +1,15 @@
+meta {
+  name: Get one tool
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/tools/0405a72e-1e1e-4c19-ba7c-e5f02af2bdc1
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Create with broken JSON
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/api/tools
+  body: json
+  auth: none
+}
+
+body:json {
+  {"name": "Rake",
+}
+
+assert {
+  res.status: eq 400
+}

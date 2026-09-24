@@ -1,0 +1,19 @@
+meta {
+  name: Update a tool
+  type: http
+  seq: 9
+}
+
+put {
+  url: {{baseUrl}}/api/tools/7332b631-aa8c-40e7-a5e0-0886eff82b1a
+  body: json
+  auth: none
+}
+
+body:json {
+  {"name":"Wheelbarrow","category":"garden","condition":"worn","available":false,"maxLoanDays":7}
+}
+
+assert {
+  res.status: eq 200
+}
