@@ -37,10 +37,12 @@ export function validateTool(req, res, next) {
     value.available = body.available;
   }
 
-  // TODO (you): maxLoanDays must be a whole number from 1 to 14.
-  // Follow the same pattern as the rules above: if it is invalid, set
-  // details.maxLoanDays = '...'; otherwise set value.maxLoanDays = body.maxLoanDays.
-  // Hint: Number.isInteger(body.maxLoanDays) is false for 2.5 and for "3".
+  // Number.isInteger is false for 2.5 and for the string "3".
+  if (!Number.isInteger(body.maxLoanDays) || body.maxLoanDays < 1 || body.maxLoanDays > 14) {
+    details.maxLoanDays = 'maxLoanDays must be a whole number from 1 to 14';
+  } else {
+    value.maxLoanDays = body.maxLoanDays;
+  }
 
   if (Object.keys(details).length > 0) {
     return res.status(400).json({ error: { message: 'Validation failed', details } });
