@@ -25,7 +25,3 @@ Requires Node.js 24.
 | DELETE | /api/tools/:id | Delete a tool | 204 |
 
 Errors use `{ "error": { "message": "...", "details": { ... } } }` with 400, 404 or 500.
-
-## AI use
-
-- Claude: helped me set up the project, explained middleware order in Express, and suggested code for the request logger, the category/available filters, the validateTool middleware, the PUT and DELETE routes, the 404 and error handlers, and a one-time script that generated the Bruno request files. I reviewed and tested the code with curl.
