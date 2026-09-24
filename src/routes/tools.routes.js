@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { tools } from '../data/tools.js';
+import { validateTool } from '../middleware/validate-tool.js';
 
 export const toolsRouter = Router();
 
@@ -39,4 +40,11 @@ toolsRouter.get('/:id', (req, res) => {
     return res.status(404).json({ error: { message: 'Tool not found' } });
   }
   res.json({ data: tool });
+});
+
+// POST /api/tools -> validateTool runs first; the handler only runs if the body is valid
+toolsRouter.post('/', validateTool, (req, res) => {
+  const tool = { id: crypto.randomUUID(), ...req.tool };
+  tools.push(tool);
+  res.status(201).json({ data: tool });
 });
