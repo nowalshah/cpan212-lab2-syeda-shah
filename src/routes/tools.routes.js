@@ -11,7 +11,6 @@ toolsRouter.get('/', (req, res) => {
   const { category, available } = req.query;
   const details = {};
 
-  // 1. Check each filter that was provided, and note every problem.
   if (category !== undefined && !CATEGORIES.includes(category)) {
     details.category = `category must be one of: ${CATEGORIES.join(', ')}`;
   }
@@ -22,7 +21,6 @@ toolsRouter.get('/', (req, res) => {
     return res.status(400).json({ error: { message: 'Invalid query', details } });
   }
 
-  // 2. Apply the filters that were provided. Both together means both must match.
   let result = tools;
   if (category !== undefined) {
     result = result.filter((t) => t.category === category);
@@ -47,4 +45,25 @@ toolsRouter.post('/', validateTool, (req, res) => {
   const tool = { id: crypto.randomUUID(), ...req.tool };
   tools.push(tool);
   res.status(201).json({ data: tool });
+});
+
+// PUT /api/tools/:id -> validateTool runs first, so a bad body is a 400
+// even when the id is unknown (the lab requires this order).
+toolsRouter.put('/:id', validateTool, (req, res) => {
+  const index = tools.findIndex((t) => t.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ error: { message: 'Tool not found' } });
+  }
+  tools[index] = { id: req.params.id, ...req.tool }; // replace all five fields, keep the id
+  res.json({ data: tools[index] });
+});
+
+// DELETE /api/tools/:id -> 204 with no body, or 404
+toolsRouter.delete('/:id', (req, res) => {
+  const index = tools.findIndex((t) => t.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ error: { message: 'Tool not found' } });
+  }
+  tools.splice(index, 1); // remove one item at that position
+  res.status(204).end();
 });
