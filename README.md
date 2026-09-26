@@ -4,6 +4,8 @@ A REST API for a community tool library, built with Express 5. It lets you creat
 
 ## How to run
 
+
+
 1. `npm install`
 2. Copy `.env.example` to `.env` (`cp .env.example .env`)
 3. `npm run dev` (or `npm start`)
@@ -25,3 +27,6 @@ Requires Node.js 24.
 | DELETE | /api/tools/:id | Delete a tool | 204 |
 
 Errors use `{ "error": { "message": "...", "details": { ... } } }` with 400, 404 or 500.
+## AI Use
+
+I used ChatGPT to help me understand the lab instructions, check my work, and troubleshoot issues while completing the project. I reviewed and applied the guidance myself.
