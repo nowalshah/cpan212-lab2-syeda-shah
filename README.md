@@ -23,7 +23,7 @@ Requires Node.js 24.
 | GET | /api/tools | List tools. Optional filters: `category`, `available` | 200 |
 | GET | /api/tools/:id | Get one tool | 200 |
 | POST | /api/tools | Create a tool | 201 |
-| PUT | /api/tools/:id | Replace all fields of a tool | 200 |
+| PUT | /api/tools/:id | Update a tool | 200 |
 | DELETE | /api/tools/:id | Delete a tool | 204 |
 
 Errors use `{ "error": { "message": "...", "details": { ... } } }` with 400, 404 or 500.
